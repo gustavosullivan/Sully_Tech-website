@@ -1,0 +1,10 @@
+dist
+dist-ssr
+*.local
+node_modules
+.DS_Store
+.env
+.env.*
+!.env.example
+.cursor
+*.tsbuildinfo
