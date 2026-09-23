@@ -26,10 +26,14 @@ export function LinkTree({ variant = 'page', onClose }: LinkTreeProps) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose?.()
     }
+    const prevOverflow = document.body.style.overflow
+    const prevTouch = document.body.style.touchAction
     document.body.style.overflow = 'hidden'
+    document.body.style.touchAction = 'none'
     window.addEventListener('keydown', onKey)
     return () => {
-      document.body.style.overflow = ''
+      document.body.style.overflow = prevOverflow
+      document.body.style.touchAction = prevTouch
       window.removeEventListener('keydown', onKey)
     }
   }, [isModal, onClose])
@@ -47,9 +51,10 @@ export function LinkTree({ variant = 'page', onClose }: LinkTreeProps) {
           <img src={logoSully} alt="Sully Tech" />
         </div>
         <h1 className="linktree__title">SULLY</h1>
-        <p className="linktree__subtitle">SOFTWARE &amp; TECH</p>
+        <p className="linktree__subtitle">TECH AND DEVELOPMENT</p>
+        <p className="linktree__heading">Entre em contato</p>
         <p className="linktree__prompt">
-          <span>&gt;</span> escolha um canal de contato_
+          <span>&gt;</span> escolha o canal_
         </p>
         <ul className="linktree__list">
           {entries.map((item) => {
@@ -117,7 +122,7 @@ export function LinkTree({ variant = 'page', onClose }: LinkTreeProps) {
         className="modal-overlay"
         role="dialog"
         aria-modal="true"
-        aria-label="Contatos Sully Tech"
+        aria-label="Entre em contato — Sully Tech"
         onClick={(e) => {
           if (e.target === e.currentTarget) onClose?.()
         }}

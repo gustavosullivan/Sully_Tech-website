@@ -35,7 +35,7 @@ export function Header({ onOpenContacts }: HeaderProps) {
             </span>
             <span className="brand__text">
               <span className="brand__name">SULLY</span>
-              <span className="brand__sub">TECH</span>
+              <span className="brand__sub">TECH AND DEVELOPMENT</span>
             </span>
           </Link>
 
@@ -50,6 +50,9 @@ export function Header({ onOpenContacts }: HeaderProps) {
           </button>
 
           <nav className={`nav${open ? ' is-open' : ''}`}>
+            <a href="#empresa" className="nav__pip" onClick={close}>
+              Empresa
+            </a>
             <a href="#sobre" className="nav__pip" onClick={close}>
               Sobre
             </a>

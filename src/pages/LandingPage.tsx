@@ -2,19 +2,25 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Header } from '../components/Header'
-import { MacTerminal } from '../components/MacTerminal'
+import { FalloutTerminal } from '../components/FalloutTerminal'
+import { HeroLogo3D } from '../components/HeroLogo3D'
+import { SceneDecor3D } from '../components/SceneDecor3D'
+import { TechOrb3D } from '../components/TechOrb3D'
+import { CompanyIntro } from '../components/CompanyIntro'
+import { Marquee } from '../components/Marquee'
+import { StatsBar } from '../components/StatsBar'
 import { AboutSection } from '../components/AboutSection'
 import { LinkTree } from '../components/LinkTree'
-import { PROJECTS, SERVICES, SOCIAL_PROOF } from '../data'
+import { PROJECTS, SERVICES, CONTACTS } from '../data'
 
 const easeOut = [0.16, 1, 0.3, 1] as const
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 28 },
   show: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.07 * i, duration: 0.5, ease: easeOut },
+    transition: { delay: 0.08 * i, duration: 0.55, ease: easeOut },
   }),
 }
 
@@ -25,91 +31,99 @@ export function LandingPage() {
     <>
       <Header onOpenContacts={() => setContactsOpen(true)} />
 
-      <section className="hero hero--saas">
-        <div className="container hero__split">
+      <section className="hero hero--crt">
+        <div className="hero__bg" />
+        <div className="hero__grid" />
+        <div className="hero__orbs" aria-hidden>
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="hero__layout">
           <motion.div
             className="hero__copy"
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: easeOut }}
           >
-            <p className="hero__eyebrow">Sully Tech · software & automação</p>
-            <h1 className="hero__headline">
-              Tecnologia que vende, atende e escala o seu negócio
-            </h1>
-            <p className="hero__sub">
-              Chatbots, web, mobile e automações com cara de produto — entrega
-              clara, foco em conversão e resultado real.
-            </p>
-            <div className="hero__actions">
-              <button
-                type="button"
-                className="btn btn--cta"
-                onClick={() => setContactsOpen(true)}
-              >
-                Começar agora
-              </button>
-              <a href="#servicos" className="btn btn--ghost">
-                Ver serviços
-              </a>
-            </div>
-            <ul className="hero__trust" aria-label="Diferenciais">
-              <li>Resposta rápida</li>
-              <li>Proposta objetiva</li>
-              <li>Entrega com qualidade</li>
-            </ul>
+            <FalloutTerminal
+              actions={
+                <>
+                  <button
+                    type="button"
+                    className="btn btn--neon"
+                    onClick={() => setContactsOpen(true)}
+                  >
+                    Contatos
+                  </button>
+                  <a href="#servicos" className="btn btn--ghost-neon">
+                    Serviços
+                  </a>
+                </>
+              }
+            />
           </motion.div>
+        </div>
+      </section>
 
+      <CompanyIntro />
+
+      <Marquee />
+      <StatsBar />
+
+      <section className="crt-mid" aria-label="CRT Sully interativo">
+        <div className="crt-mid__inner">
           <motion.div
-            className="hero__terminal"
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: easeOut, delay: 0.12 }}
+            className="crt-mid__stage-wrap"
+            initial={{ opacity: 0, y: 36 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.75, ease: easeOut }}
           >
-            <MacTerminal />
+            <SceneDecor3D />
+            <HeroLogo3D />
           </motion.div>
+          <p className="crt-mid__caption">
+            <span className="hero__caption-dot" /> CRT Sully · WebGL interativo
+          </p>
         </div>
       </section>
 
-      <section className="social-proof" aria-label="Tecnologias e canais">
+      <section className="section section--showcase" id="servicos">
         <div className="container">
-          <p className="social-proof__label">Integramos o que o seu negócio já usa</p>
-          <ul className="social-proof__list">
-            {SOCIAL_PROOF.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
+          <div className="showcase__head">
+            <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
+              <motion.p className="eyebrow" variants={fadeUp}>
+                Serviços
+              </motion.p>
+              <motion.h2 className="section-title" variants={fadeUp} custom={1}>
+                Soluções que vendem e escalam
+              </motion.h2>
+              <motion.p className="section-lead" variants={fadeUp} custom={2}>
+                Do chatbot ao sistema integrado — com cara de produto e engenharia
+                de verdade.
+              </motion.p>
+            </motion.div>
+            <TechOrb3D className="showcase__orb" />
+          </div>
 
-      <section className="section" id="servicos">
-        <div className="container">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
-            <motion.p className="eyebrow" variants={fadeUp}>
-              Serviços
-            </motion.p>
-            <motion.h2 className="section-title" variants={fadeUp} custom={1}>
-              Tudo que você precisa para digitalizar com propósito
-            </motion.h2>
-            <motion.p className="section-lead" variants={fadeUp} custom={2}>
-              Do primeiro contato automatizado ao produto no ar — com marca,
-              performance e foco em conversão.
-            </motion.p>
-          </motion.div>
-
-          <div className="bento">
+          <div className="services-grid">
             {SERVICES.map((service, i) => (
               <motion.article
                 key={service.code}
-                className={`bento__item bento__item--${service.size ?? 'md'}`}
-                initial={{ opacity: 0, y: 20 }}
+                className="service service--tilt service--glass"
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: i * 0.06, duration: 0.45 }}
+                transition={{ delay: i * 0.07, duration: 0.45 }}
+                whileHover={{ y: -10, rotateX: 5, rotateY: -4 }}
+                style={{ transformStyle: 'preserve-3d' }}
               >
-                <span className="bento__code">{service.code}</span>
-                <h3 className="bento__title">{service.title}</h3>
-                <p className="bento__copy">{service.copy}</p>
+                <span className="service__code">{service.code}</span>
+                <h3 className="service__title">{service.title}</h3>
+                <p className="service__copy">{service.copy}</p>
+                <div className="service__shine" aria-hidden />
               </motion.article>
             ))}
           </div>
@@ -128,8 +142,8 @@ export function LandingPage() {
               Entregas com cara de produto
             </motion.h2>
             <motion.p className="section-lead" variants={fadeUp} custom={2}>
-              Uma vitrine do que a Sully Tech constrói — chatbot, web, mobile e
-              automação.
+              Chatbot, web, mobile e automação — vitrine do que a Sully Tech
+              constrói.
             </motion.p>
           </motion.div>
 
@@ -137,11 +151,12 @@ export function LandingPage() {
             {PROJECTS.map((project, i) => (
               <motion.article
                 key={project.id}
-                className="project project--clean"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="project project--glass"
+                initial={{ opacity: 0, y: 24, rotateX: 8 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ delay: i * 0.07, duration: 0.45 }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                whileHover={{ y: -8, scale: 1.015 }}
               >
                 <div className="project__top">
                   <span className="project__tag">{project.tag}</span>
@@ -163,39 +178,42 @@ export function LandingPage() {
       <section className="cta" id="contato">
         <div className="container">
           <motion.div
-            className="cta__panel cta__panel--light"
-            initial={{ opacity: 0, y: 18 }}
+            className="cta__panel cta__panel--wow"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.55 }}
           >
+            <div className="cta__glow" aria-hidden />
+            <div className="cta__grid-fx" aria-hidden />
             <div>
               <p className="eyebrow">Próximo passo</p>
-              <h2 className="section-title">Pronto para colocar sua ideia no ar?</h2>
+              <h2 className="section-title">Vamos colocar sua ideia no ar?</h2>
               <p className="section-lead">
-                Fale com a gente, receba uma proposta clara e avance com
-                confiança.
+                Abre o link tree, manda um WhatsApp ou conecta no LinkedIn.
+                Solicite um orçamento.
               </p>
             </div>
             <div className="cta__actions">
-              <button
-                type="button"
-                className="btn btn--cta"
-                onClick={() => setContactsOpen(true)}
-              >
-                Começar agora
-              </button>
               <a
-                className="btn btn--ghost"
-                href="https://wa.me/5554993698492"
+                className="btn btn--neon"
+                href={CONTACTS.whatsapp.href}
                 target="_blank"
                 rel="noreferrer"
               >
                 WhatsApp
               </a>
-              <Link to="/site" className="btn btn--ghost">
-                /site
-              </Link>
+              <a
+                className="btn btn--ghost"
+                href={CONTACTS.linkedin.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a className="btn btn--ghost" href={CONTACTS.email.href}>
+                Gmail
+              </a>
             </div>
           </motion.div>
         </div>

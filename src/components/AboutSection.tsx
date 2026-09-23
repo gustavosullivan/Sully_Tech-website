@@ -23,7 +23,6 @@ export function AboutSection() {
           </div>
 
           <div className="about__content">
-            <p className="eyebrow">// about_me</p>
             <h2 className="about__name">{ABOUT.name}</h2>
             <p className="about__role">{ABOUT.role}</p>
             <p className="about__lead">{ABOUT.lead}</p>
@@ -32,19 +31,6 @@ export function AboutSection() {
                 {p}
               </p>
             ))}
-            <div className="about__links">
-              <a
-                className="btn btn--solid"
-                href="https://www.linkedin.com/in/gustavobportelacc/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                LinkedIn
-              </a>
-              <a className="btn btn--ghost" href="#projetos">
-                Ver projetos
-              </a>
-            </div>
           </div>
         </motion.div>
       </div>
