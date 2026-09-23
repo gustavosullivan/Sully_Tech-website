@@ -28,7 +28,7 @@ export const CONTACTS = {
 export const ABOUT = {
   name: 'Gustavo Portela',
   role: 'Fundador · Sully Tech',
-  photo: '/gustavo.jpg',
+  photo: `${import.meta.env.BASE_URL}gustavo.jpg`,
   motto: 'Disciplina constrói liberdade',
   lead:
     'Sou desenvolvedor e fundador da Sully Tech. Ajudo empresas e pessoas a tirar ideias do papel — seja um chatbot, um app, um site ou uma automação que realmente facilita o dia a dia.',
