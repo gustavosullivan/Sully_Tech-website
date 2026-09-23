@@ -4,7 +4,7 @@ import { SitePage } from './pages/SitePage'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Sully_Tech-website">
       <div className="noise" aria-hidden />
       <Routes>
         <Route path="/" element={<LandingPage />} />

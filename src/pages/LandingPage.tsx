@@ -1,24 +1,20 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { Header } from '../components/Header'
-import { FalloutTerminal } from '../components/FalloutTerminal'
-import { HeroLogo3D } from '../components/HeroLogo3D'
-import { SceneDecor3D } from '../components/SceneDecor3D'
-import { Marquee } from '../components/Marquee'
-import { StatsBar } from '../components/StatsBar'
+import { MacTerminal } from '../components/MacTerminal'
 import { AboutSection } from '../components/AboutSection'
 import { LinkTree } from '../components/LinkTree'
-import { PROJECTS, SERVICES } from '../data'
-import { useState } from 'react'
+import { PROJECTS, SERVICES, SOCIAL_PROOF } from '../data'
 
 const easeOut = [0.16, 1, 0.3, 1] as const
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   show: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.08 * i, duration: 0.55, ease: easeOut },
+    transition: { delay: 0.07 * i, duration: 0.5, ease: easeOut },
   }),
 }
 
@@ -29,81 +25,98 @@ export function LandingPage() {
     <>
       <Header onOpenContacts={() => setContactsOpen(true)} />
 
-      <section className="hero">
-        <div className="hero__bg" />
-        <div className="hero__grid" />
-        <div className="hero__orbs" aria-hidden>
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="hero__layout">
+      <section className="hero hero--saas">
+        <div className="container hero__split">
           <motion.div
             className="hero__copy"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: easeOut }}
           >
-            <FalloutTerminal />
+            <p className="hero__eyebrow">Sully Tech · software & automação</p>
+            <h1 className="hero__headline">
+              Tecnologia que vende, atende e escala o seu negócio
+            </h1>
+            <p className="hero__sub">
+              Chatbots, web, mobile e automações com cara de produto — entrega
+              clara, foco em conversão e resultado real.
+            </p>
+            <div className="hero__actions">
+              <button
+                type="button"
+                className="btn btn--cta"
+                onClick={() => setContactsOpen(true)}
+              >
+                Começar agora
+              </button>
+              <a href="#servicos" className="btn btn--ghost">
+                Ver serviços
+              </a>
+            </div>
+            <ul className="hero__trust" aria-label="Diferenciais">
+              <li>Resposta rápida</li>
+              <li>Proposta objetiva</li>
+              <li>Entrega com qualidade</li>
+            </ul>
           </motion.div>
 
           <motion.div
-            className="hero__visual"
-            initial={{ opacity: 0, y: 36 }}
+            className="hero__terminal"
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: easeOut, delay: 0.2 }}
+            transition={{ duration: 0.65, ease: easeOut, delay: 0.12 }}
           >
-            <div className="hero__stage-wrap">
-              <SceneDecor3D />
-              <HeroLogo3D />
-            </div>
-            <p className="hero__caption">
-              <span className="hero__caption-dot" /> CRT Sully · interativo
-            </p>
+            <MacTerminal />
           </motion.div>
         </div>
       </section>
 
-      <Marquee />
-      <StatsBar />
-      <AboutSection />
+      <section className="social-proof" aria-label="Tecnologias e canais">
+        <div className="container">
+          <p className="social-proof__label">Integramos o que o seu negócio já usa</p>
+          <ul className="social-proof__list">
+            {SOCIAL_PROOF.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <section className="section" id="servicos">
         <div className="container">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
             <motion.p className="eyebrow" variants={fadeUp}>
               Serviços
             </motion.p>
             <motion.h2 className="section-title" variants={fadeUp} custom={1}>
-              Soluções que vendem e escalam
+              Tudo que você precisa para digitalizar com propósito
             </motion.h2>
             <motion.p className="section-lead" variants={fadeUp} custom={2}>
-              Do primeiro contato automatizado ao produto no ar — com cara de
-              marca e foco em resultado.
+              Do primeiro contato automatizado ao produto no ar — com marca,
+              performance e foco em conversão.
             </motion.p>
           </motion.div>
 
-          <div className="services-grid">
+          <div className="bento">
             {SERVICES.map((service, i) => (
               <motion.article
                 key={service.code}
-                className="service service--tilt"
-                initial={{ opacity: 0, y: 24 }}
+                className={`bento__item bento__item--${service.size ?? 'md'}`}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: i * 0.07, duration: 0.45 }}
-                whileHover={{ y: -8, rotateX: 4, rotateY: -3 }}
-                style={{ transformStyle: 'preserve-3d' }}
+                transition={{ delay: i * 0.06, duration: 0.45 }}
               >
-                <span className="service__code">{service.code}</span>
-                <h3 className="service__title">{service.title}</h3>
-                <p className="service__copy">{service.copy}</p>
-                <div className="service__shine" aria-hidden />
+                <span className="bento__code">{service.code}</span>
+                <h3 className="bento__title">{service.title}</h3>
+                <p className="bento__copy">{service.copy}</p>
               </motion.article>
             ))}
           </div>
         </div>
       </section>
+
+      <AboutSection />
 
       <section className="section section--alt" id="projetos">
         <div className="container">
@@ -124,11 +137,11 @@ export function LandingPage() {
             {PROJECTS.map((project, i) => (
               <motion.article
                 key={project.id}
-                className="project project--glass"
-                initial={{ opacity: 0, y: 24 }}
+                className="project project--clean"
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
+                transition={{ delay: i * 0.07, duration: 0.45 }}
               >
                 <div className="project__top">
                   <span className="project__tag">{project.tag}</span>
@@ -150,28 +163,27 @@ export function LandingPage() {
       <section className="cta" id="contato">
         <div className="container">
           <motion.div
-            className="cta__panel cta__panel--wow"
-            initial={{ opacity: 0, y: 20 }}
+            className="cta__panel cta__panel--light"
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="cta__glow" aria-hidden />
             <div>
               <p className="eyebrow">Próximo passo</p>
-              <h2 className="section-title">Vamos colocar sua ideia no ar?</h2>
+              <h2 className="section-title">Pronto para colocar sua ideia no ar?</h2>
               <p className="section-lead">
-                Abre o link tree, manda um WhatsApp ou conecta no LinkedIn.
-                Resposta rápida, proposta clara.
+                Fale com a gente, receba uma proposta clara e avance com
+                confiança.
               </p>
             </div>
             <div className="cta__actions">
               <button
                 type="button"
-                className="btn btn--solid"
+                className="btn btn--cta"
                 onClick={() => setContactsOpen(true)}
               >
-                Abrir contatos
+                Começar agora
               </button>
               <a
                 className="btn btn--ghost"

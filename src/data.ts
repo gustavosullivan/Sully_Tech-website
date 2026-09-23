@@ -72,26 +72,45 @@ export const PROJECTS = [
   },
 ] as const
 
+export const SOCIAL_PROOF = [
+  'WhatsApp',
+  'React',
+  'TypeScript',
+  'Python',
+  'APIs',
+  'Landing pages',
+] as const
+
 export const SERVICES = [
   {
     code: '01',
-    title: 'Chatbots',
-    copy: 'Conversas que vendem, atendem e qualificam — no WhatsApp ou no site.',
+    title: 'Chatbots inteligentes',
+    copy: 'Conversas que vendem, atendem e qualificam — no WhatsApp ou no site, 24/7.',
+    size: 'lg' as const,
   },
   {
     code: '02',
     title: 'Web & Mobile',
-    copy: 'Aplicações sob medida, rápidas e pensadas pro uso real.',
+    copy: 'Aplicações sob medida, rápidas e pensadas pro uso real do seu time e do cliente.',
+    size: 'md' as const,
   },
   {
     code: '03',
-    title: 'Automações',
-    copy: 'Processos que rodam sozinhos — menos operação manual, mais escala.',
+    title: 'Automações de processos',
+    copy: 'Tarefas manuais viram fluxo — menos erro, mais escala.',
+    size: 'md' as const,
   },
   {
     code: '04',
-    title: 'Sites & Web',
-    copy: 'Sites, landings e presença digital com foco em resultado.',
+    title: 'Sites & landing pages',
+    copy: 'Presença digital com cara de marca, performance e conversão.',
+    size: 'sm' as const,
+  },
+  {
+    code: '05',
+    title: 'Sistemas & integrações',
+    copy: 'Conectamos ferramentas, APIs e dados para o negócio fluir.',
+    size: 'sm' as const,
   },
 ] as const
 
